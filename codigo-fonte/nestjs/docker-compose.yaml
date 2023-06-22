@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  mongodb-primary:
+    container_name: 'mongodb'
+    image: 'bitnami/mongodb:latest'
+    environment:
+      MONGODB_ADVERTISED_HOSTNAME: mongodb-primary
+      MONGODB_REPLICA_SET_MODE: primary
+      MONGODB_ROOT_PASSWORD: root
+      MONGODB_REPLICA_SET_KEY: 123456
+      MONGODB_DATABASE: nest
+    ports:
+      - 27017:27017    
+    volumes:
+      - 'mongodb_data:/bitnami'
+    networks:
+      - minha_rede
+
   app:
     container_name: 'app-nestjs'
     build: .
@@ -13,20 +29,9 @@ services:
       - minha_rede
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
+    depends_on:
+      - mongodb-primary
       # não use docker desktop (linux) ou (windows)
-  
-  db:
-    container_name: 'mongo_db'
-    image: bitnami/mongodb:5.0.17
-    volumes:
-      - mongodb_data:/bitnami/mongodb
-    environment:
-      MONGODB_ROOT_PASSWORD: root
-      MONGODB_REPLICA_SET_MODE: primary
-      MONGODB_REPLICA_SET_KEY: 123456
-      MONGODB_DATABASE: nest
-    networks:
-      - minha_rede
 
 volumes:
   mongodb_data:
@@ -36,11 +41,3 @@ networks:
   minha_rede:
       name: minha_rede
       external: true
-# //Linux ou Mac
-# /etc/hosts
-
-# 127.0.0.1 host.docker.internal
-
-# //Windows
-# C:\Windows\system32\drivers\etc\hosts (bloco de notas como administrador)
-# 127.0.0.1 host.docker.internal

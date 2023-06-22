@@ -4,6 +4,15 @@ RUN apt-get update -y && apt-get install -y openssl
 
 WORKDIR  /home/node/app
 
+COPY package*.json ./
+
+RUN npm install \
+    npm install prisma
+
+COPY . .
+
+RUN npx prisma generate
+
 USER node
 
 CMD [ "tail", "-f", "/dev/null" ]
