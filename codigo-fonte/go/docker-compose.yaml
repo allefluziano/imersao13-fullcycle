@@ -1,6 +1,7 @@
 version: '3'
 services:
   zookeeper:
+    container_name: 'zookeeper'
     image: confluentinc/cp-zookeeper:latest
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
@@ -8,6 +9,7 @@ services:
       - minha_rede
   
   kafka:
+    container_name: 'kafka'
     image: confluentinc/cp-kafka:latest
     depends_on:
       - zookeeper
@@ -28,6 +30,7 @@ services:
       - "host.docker.internal:172.17.0.1"
   
   control-center:
+    container_name: 'control-center'
     image: confluentinc/cp-enterprise-control-center:latest
     hostname: control-center
     depends_on:
