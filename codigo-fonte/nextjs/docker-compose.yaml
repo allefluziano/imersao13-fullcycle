@@ -7,3 +7,12 @@ services:
       - 3001:3000
     volumes:
       - .:/home/node/app
+    networks:
+      - minha_rede
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+
+networks:
+  minha_rede:
+      name: minha_rede
+      external: true

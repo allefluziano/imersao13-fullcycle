@@ -19,7 +19,7 @@ const colors = {
 };
 
 export interface ChartComponentRef {
-  update: (data: { time: string; value: number }) => void;
+  update: (data: { time: number; value: number }) => void;
 }
 
 const chartOptions = {
@@ -74,24 +74,18 @@ export const ChartComponent = forwardRef<
       topColor: colors.areaTopColor,
       bottomColor: colors.areaBottomColor,
     });
-    seriesRef.current.setData([
-      { time: "2018-12-21", value: 32.51 },
-      { time: "2018-12-22", value: 33.15 },
-      { time: "2018-12-23", value: 33.12 },
-      { time: "2018-12-24", value: 33.07 },
-      { time: "2018-12-25", value: 31.11 },
-      { time: "2018-12-26", value: 32.34 },
-      { time: "2018-12-27", value: 32.54 },
-      { time: "2018-12-28", value: 32.00 },
-      { time: "2018-12-29", value: 27.02 },
-      { time: "2018-12-30", value: 27.32 },
-      { time: "2018-12-31", value: 25.17 },
-      { time: "2019-01-01", value: 28.89 },
-      { time: "2019-01-02", value: 25.46 },
-      { time: "2019-01-03", value: 23.92 },
-      { time: "2019-01-04", value: 22.68 },
-      { time: "2019-01-05", value: 22.67 },
-    ]);
+    // seriesRef.current.setData([
+    //   { time: "2018-12-22", value: 32.51 },
+    //   { time: "2018-12-23", value: 31.11 },
+    //   { time: "2018-12-24", value: 27.02 },
+    //   { time: "2018-12-25", value: 27.32 },
+    //   { time: "2018-12-26", value: 25.17 },
+    //   { time: "2018-12-27", value: 28.89 },
+    //   { time: "2018-12-28", value: 25.46 },
+    //   { time: "2018-12-29", value: 23.92 },
+    //   { time: "2018-12-30", value: 22.68 },
+    //   { time: "2018-12-31", value: 22.67 },
+    // ]);
   }, []);
 
   useLayoutEffect(() => {

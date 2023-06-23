@@ -77,3 +77,8 @@ Content-Type: application/json
   "negotiated_shares": 5,
   "price": 10
 }
+
+
+
+###
+GET http://localhost:3000/wallets/wallet1/assets/events
