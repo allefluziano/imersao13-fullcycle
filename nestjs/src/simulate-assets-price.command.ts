@@ -101,13 +101,13 @@ export class SimulateAssetsPriceCommand extends CommandRunner {
       Array.from({ length: end - start }, (_, i) => i + start);
 
     for (const index of range(1, 500)) {
-      const num1 = 100 + Math.floor(Math.random() * 30);
-      console.log(num1);
+      const randomNumber = generateRandomNumber(-30, 30);
+      console.log(randomNumber);
 
       await this.ordersService.initTransaction({
         asset_id: 'asset1',
         wallet_id: 'wallet1',
-        price: num1 + index,
+        price: randomNumber + index,
         // price: 100 + index,
         shares: 1000,
         type: 'SELL',
@@ -116,19 +116,16 @@ export class SimulateAssetsPriceCommand extends CommandRunner {
       await this.ordersService.initTransaction({
         asset_id: 'asset1',
         wallet_id: 'wallet2',
-        price: num1 + index + 10,
+        price: randomNumber + index + 10,
         // price: 100 + index + 10,
         shares: 1000,
         type: 'BUY',
       });
 
-      const num2 = 200 + Math.floor(Math.random() * 30);
-      console.log(num2);
-
       await this.ordersService.initTransaction({
         asset_id: 'asset2',
         wallet_id: 'wallet1',
-        price: num2 + index,
+        price: randomNumber + index,
         // price: 200 + index,
         shares: 1000,
         type: 'SELL',
@@ -137,7 +134,7 @@ export class SimulateAssetsPriceCommand extends CommandRunner {
       await this.ordersService.initTransaction({
         asset_id: 'asset2',
         wallet_id: 'wallet2',
-        price: num2 + index + 10,
+        price: randomNumber + index + 10,
         // price: 200 + index + 10,
         shares: 1000,
         type: 'BUY',
@@ -149,3 +146,9 @@ export class SimulateAssetsPriceCommand extends CommandRunner {
 }
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+function generateRandomNumber(inferiorLimit: number, superiorLimit: number) {
+  const range = superiorLimit - inferiorLimit + 1;
+  const number = Math.floor(Math.random() * range) + inferiorLimit;
+  return number;
+}

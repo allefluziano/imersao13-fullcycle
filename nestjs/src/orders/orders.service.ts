@@ -110,7 +110,6 @@ export class OrdersService {
           },
         });
         if (walletAsset) {
-          console.log(walletAsset);
           //se já tiver o ativo na carteira, atualiza a quantidade de ativos
           await prisma.walletAsset.update({
             where: {

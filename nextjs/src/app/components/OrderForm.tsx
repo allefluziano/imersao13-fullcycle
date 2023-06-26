@@ -41,7 +41,6 @@ export function OrderForm(props: {
 }) {
   return (
     <div>
-      <h1>Order Form</h1>
       <form action={initTransaction}>
         <input name="asset_id" type="hidden" defaultValue={props.asset_id} />
         <input name="wallet_id" type="hidden" defaultValue={props.wallet_id} />

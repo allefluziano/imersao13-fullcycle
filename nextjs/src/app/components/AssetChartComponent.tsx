@@ -23,7 +23,6 @@ export const AssetChartComponent = (props: { asset_id: string }) => {
     (path, { next }: SWRSubscriptionOptions) => {
       const eventSource = new EventSource(path);
       eventSource.addEventListener("asset-daily-created", async (event) => {
-        console.log(event);
         const assetDailyCreated: AssetDaily = JSON.parse(event.data);
         chartRef.current.update({
           time: new Date(assetDailyCreated.date).getTime(),
@@ -37,11 +36,9 @@ export const AssetChartComponent = (props: { asset_id: string }) => {
       });
 
       eventSource.onerror = (event) => {
-        console.log(event);
         eventSource.close();
       };
       return () => {
-        console.log("close event source");
         eventSource.close();
       };
     },

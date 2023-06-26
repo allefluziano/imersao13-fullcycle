@@ -11,7 +11,6 @@ export function SyncOrders(props: PropsWithChildren<{ wallet_id: string }>) {
       const eventSource = new EventSource(path);
 
       eventSource.addEventListener("order-created", async (event) => {
-        console.log(event);
         const orderCreated = JSON.parse(event.data);
         next(null, orderCreated);
         startTransition(() => {
@@ -19,7 +18,6 @@ export function SyncOrders(props: PropsWithChildren<{ wallet_id: string }>) {
         });
       });
       eventSource.addEventListener("order-updated", async (event) => {
-        console.log(event);
         const orderUpdated = JSON.parse(event.data);
         next(null, orderUpdated);
         startTransition(() => {
@@ -28,13 +26,11 @@ export function SyncOrders(props: PropsWithChildren<{ wallet_id: string }>) {
       });
 
       eventSource.onerror = (event) => {
-        console.log("error:", event);
         eventSource.close();
         //@ts-ignore
         next(event.data, null);
       };
       return () => {
-        console.log("close event source");
         eventSource.close();
       };
     }

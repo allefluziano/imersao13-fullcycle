@@ -59,7 +59,6 @@ export class WalletAssetsService {
           { fullDocument: 'updateLookup' },
         )
         .on('change', async (data) => {
-          console.log(data);
           const walletAsset = await this.prismaService.walletAsset.findUnique({
             where: {
               id: data.fullDocument._id + '',

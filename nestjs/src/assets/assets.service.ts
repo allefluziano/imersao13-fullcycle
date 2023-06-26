@@ -49,7 +49,6 @@ export class AssetsService {
           { fullDocument: 'updateLookup' },
         )
         .on('change', async (data) => {
-          console.log(data);
           const asset = await this.prismaService.asset.findUnique({
             where: {
               id: data.fullDocument.id + '',

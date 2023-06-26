@@ -31,7 +31,6 @@ export class AssetsDailyService {
     event: 'asset-daily-created';
     data: AssetDaily;
   }> {
-    console.log(asset_id);
     return new Observable((observer) => {
       this.assetDailyModel
         .watch(
@@ -48,7 +47,6 @@ export class AssetsDailyService {
           },
         )
         .on('change', async (data) => {
-          console.log(data);
           const asset = await this.prismaService.assetDaily.findUnique({
             where: {
               id: data.fullDocument._id + '',
